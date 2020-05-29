@@ -199,8 +199,10 @@ short computeFirstMinuteNumber(short minute)
         return 3;
     else if (minute >= 20)
         return 2;
-    else if (minute <= 10)
+    else if (minute >= 10)
         return 1;   
+    else if (minute >= 0)
+        return 0;
 }
 
 short computeSecondMinuteNumber(short minute, short firstNumber)
