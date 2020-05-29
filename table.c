@@ -38,6 +38,7 @@ void computeAngleValues()
 
 void drawTable()
 {
+    computeAngleValues();
     ConsoleSize consoleSize = getSizeOfConsole();
 
     drawRow(consoleSize.right, AngleLeftTop);

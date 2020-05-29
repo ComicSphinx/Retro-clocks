@@ -15,9 +15,8 @@ void main()
     GetConsoleScreenBufferInfo(HStdOut, &CsbInfo);
 
     system("cls");
-    computeAngleValues();
     drawTable();
 
-    cycleTime();
+    cycleDrawTime();
 
 }

@@ -26,7 +26,7 @@ typedef struct
 } Angles;
 
 
-void cycleTime();
+void cycleDrawTime();
 void showTime();
 bool checkTimeIsChanged();
 void clearTime();
@@ -40,7 +40,7 @@ short computeFirstMinuteNumber(short minute);
 short computeSecondMinuteNumber(short minute, short firstNumber);
 
 
-void cycleTime()
+void cycleDrawTime()
 {
     while (true)
     {   
