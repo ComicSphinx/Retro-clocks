@@ -1,8 +1,4 @@
-/*
- * @Author: Daniil Maslov
- * @CreationDate: 22.05.2020
- * @LastUpdate: 25.05.2020
- */
+/* @Author: Daniil Maslov */
 
 #define SHORT_LINE_LENGTH 6
 #define SHORT_LINE_LENGTH_MINUS_TWO 4

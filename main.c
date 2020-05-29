@@ -1,10 +1,4 @@
-/*
- * @Author: Daniil Maslov
- * @CreationDate: 21.05.2020
- * @LastUpdate: 24.05.2020 
- * 
- * TODO оно не хочет работать с нулями в минутах. я там ошибку сделал в compute функциях
- */
+/* @Author: Daniil Maslov */
 
 #include <windows.h>
 #include <stdio.h>

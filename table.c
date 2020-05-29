@@ -1,8 +1,4 @@
-/*
- * @Author: Daniil Maslov
- * @CreationDate: 22.05.2020
- * @LastUpdate: 22.05.2020
- */
+/* @Author: Daniil Maslov */
 
 #define CHAR_EMPTY ' '
 #define CHAR_ROW '-'

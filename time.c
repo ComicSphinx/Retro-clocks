@@ -1,16 +1,4 @@
-/*
- * @Author: Daniil Maslov
- * @CreationDate: 22.05.2020
- * @LastUpdate: 25.05.2020
- * 
- * IMPORTANT вывести числа в едином стиле
- * 
- * TODO: Запилить аргугменты для функции, чтобы можно было отрисовывать числа разными цветами
- * TODO: Перерисовать все числа под один размер.
- * TODO: Разместить числа ровно по-середине.
- * 
- * IMPORTANT TODO: диспетчер задач показывает, что прога потребляет 40-60% цп. Надо попробовать пофиксить
- */ 
+/* @Author: Daniil Maslov */ 
 
 #define EMPTY_CHAR ' '
 
@@ -56,7 +44,6 @@ void cycleTime()
 {
     while (true)
     {   
-        // IMPORTANT : как оно вообще делает showTime, если до обновления минут оно не должно вызываться?
         if (checkTimeIsChanged())
         {
             clearTime();
@@ -89,7 +76,6 @@ bool checkTimeIsChanged()
 
 void showTime()
 {
-    //IMPORTANT: Оно не выводит ноль, если он попадается в minuteFirstNumber ? 
     Time time = computeTimeNumbers();
     Angles angles = getAngles();
 
