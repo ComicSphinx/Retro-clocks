@@ -174,12 +174,12 @@ Time computeTimeNumbers()
 
 short computeFirstHourNumber(short hour)
 {
-    static short number = 20;
-
-    if (hour < number)
-        return 1;
-    else if (number >= 20)
+    if (hour >= 20)
         return 2;
+    else if (hour >= 10)
+        return 1;
+    else if (hour >= 0)
+        return 0;
 }
 
 short computeSecondHourNumber(short hour, short firstNumber)
