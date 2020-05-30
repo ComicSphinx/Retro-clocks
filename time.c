@@ -60,7 +60,7 @@ bool checkTimeIsChanged()
     currentTime = getTime();
 
     if (currentTime.hour > oldTime.hour || currentTime.minute > oldTime.minute || 
-        currentTime.hour < oldTime.hour || currentTime.minute < oldTime.minute)
+        currentTime.hour < oldTime.hour)
     {
         oldTime.hour = currentTime.hour;
         oldTime.minute = currentTime.minute;
