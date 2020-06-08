@@ -14,6 +14,8 @@ void main()
     HStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
     GetConsoleScreenBufferInfo(HStdOut, &CsbInfo);
 
+    SetConsoleTitle("Pretty clocks");
+
     system("cls");
     drawTable();
 
