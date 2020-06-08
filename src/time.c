@@ -144,17 +144,21 @@ Angles getAngles()
 {
     Angles angles;
 
-    angles.hourFirstNumberAngle.X = 2;
-    angles.hourFirstNumberAngle.Y = 2;
+    ConsoleSize consoleSize = getSizeOfConsole();
+
+    angles.hourFirstNumberAngle.X = ((consoleSize.right / 2) / 2);
+    short x = (angles.hourFirstNumberAngle.X / 2) / 2;
+    angles.hourFirstNumberAngle.X += x;
+    angles.hourFirstNumberAngle.Y = (consoleSize.bottom / 2) - 7;
     
-    angles.hourSecondNumberAngle.X = 12;
-    angles.hourSecondNumberAngle.Y = 2;
+    angles.hourSecondNumberAngle.X = angles.hourFirstNumberAngle.X + 10;
+    angles.hourSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
 
-    angles.minutesFirstNumberAngle.X = 30;
-    angles.minutesFirstNumberAngle.Y = 2;
+    angles.minutesFirstNumberAngle.X = 18 + angles.hourSecondNumberAngle.X;
+    angles.minutesFirstNumberAngle.Y = angles.hourFirstNumberAngle.Y;
 
-    angles.minutesSecondNumberAngle.X = 42;
-    angles.minutesSecondNumberAngle.Y = 2;
+    angles.minutesSecondNumberAngle.X = 12 + angles.minutesFirstNumberAngle.X;
+    angles.minutesSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
 
     return angles;
 }
