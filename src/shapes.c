@@ -3,7 +3,7 @@
 #define SHORT_LINE_LENGTH 6
 #define SHORT_LINE_LENGTH_MINUS_TWO 4
 #define LONG_LINE_LENGTH 12
-#define CHAR_NUMBERS 177
+#define CHAR_NUMBERS 179
 #define DOT 2
 
 void drawZero(COORD startPosition);
