@@ -2,6 +2,8 @@
 
 My home-made project. Clocks. Shows local time (time on your PC).
 
+![Image alt](https://github.com/Desasth/Clocks/blob/master/images/screenshot.JPG)
+
 ## Getting started
 
 ### How to compile
@@ -17,5 +19,5 @@ My home-made project. Clocks. Shows local time (time on your PC).
  * Need to add ability to print time in different colors.
 
 ## Author
-  - **Dannil Maslov** -
+  - **Daniil Maslov** -
     [Desasth](https://github.com/Desasth)
