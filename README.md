@@ -1,4 +1,4 @@
-# Terminal clocks
+# Console-clocks
 
 My home-made project. Clocks. Shows local time (time on your PC).
 
