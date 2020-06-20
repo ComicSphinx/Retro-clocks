@@ -16,6 +16,7 @@ typedef struct
 
 COORD AngleLeftTop;
 COORD AngleLeftBottom;
+COORD AngleRightTop;
 HANDLE HStdOut;
 CONSOLE_SCREEN_BUFFER_INFO CsbInfo;
 
@@ -23,8 +24,18 @@ void computeAngleValues();
 void drawTable();
 ConsoleSize getSizeOfConsole();
 void drawRow(short length, COORD startPosition);
-void drawColumn(short length, COORD startPosition, short numberOfIterations);
-void clearContentPlace(short length, short numberOfIterations);
+void drawColumn(short numberOfIterations, COORD startPosition);
+
+void drawTable()
+{
+    computeAngleValues();
+    ConsoleSize consoleSize = getSizeOfConsole();
+
+    drawRow(consoleSize.right, AngleLeftTop);
+    drawRow(consoleSize.right, AngleLeftBottom);
+    drawColumn((++consoleSize.bottom), AngleLeftTop);
+    drawColumn((++consoleSize.bottom), AngleRightTop);
+}
 
 void computeAngleValues()
 {
@@ -34,20 +45,8 @@ void computeAngleValues()
     AngleLeftTop.Y = 0;
     AngleLeftBottom.X = consoleSize.left;
     AngleLeftBottom.Y = consoleSize.bottom;
-}
-
-void drawTable()
-{
-    computeAngleValues();
-    ConsoleSize consoleSize = getSizeOfConsole();
-
-    drawRow(consoleSize.right, AngleLeftTop);
-    drawRow(consoleSize.right, AngleLeftBottom);
-    drawColumn(consoleSize.right, AngleLeftTop, (consoleSize.bottom - 1));
-    
-    short length = consoleSize.right - 2;
-    short numberOfIterations = (consoleSize.bottom - 1);
-    clearContentPlace(length, numberOfIterations);
+    AngleRightTop.X = consoleSize.right;
+    AngleRightTop.Y = 0;
 }
 
 ConsoleSize getSizeOfConsole()
@@ -68,28 +67,13 @@ void drawRow(short length, COORD startPosition)
     FillConsoleOutputCharacter(HStdOut, (TCHAR)CHAR_ROW, length, startPosition, &cWrittenChars);
 }
 
-void drawColumn(short length, COORD startPosition, short numberOfIterations)
+void drawColumn(short numberOfIterations, COORD startPosition)
 {
     long unsigned int cWrittenChars;
 
-    for (int i = 1; i <= numberOfIterations; ++i)
+    for (int i = 0; i < numberOfIterations; ++i)
     {
         startPosition.Y = i;
-        FillConsoleOutputCharacter(HStdOut, (TCHAR)CHAR_COLUMN, length, startPosition, &cWrittenChars);
-    }
-}
-
-void clearContentPlace(short length, short numberOfIterations)
-{
-    long unsigned int cWrittenChars;
-    COORD startPosition;
-    startPosition.X = 1;
-    startPosition.Y = 1;
-
-
-    for (int j = 0; j < numberOfIterations; ++j)
-    {
-        FillConsoleOutputCharacter(HStdOut, (TCHAR)CHAR_EMPTY, length, startPosition, &cWrittenChars);
-        ++startPosition.Y;
+        FillConsoleOutputCharacter(HStdOut, (TCHAR)CHAR_COLUMN, 1, startPosition, &cWrittenChars);
     }
 }
