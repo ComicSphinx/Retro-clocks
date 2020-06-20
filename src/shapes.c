@@ -3,8 +3,21 @@
 #define SHORT_LINE_LENGTH 6
 #define SHORT_LINE_LENGTH_MINUS_TWO 4
 #define LONG_LINE_LENGTH 12
-#define CHAR_NUMBERS 179
+#define CHAR_NUMBERS 219
 #define DOT 2
+
+
+typedef struct
+{
+    short left;
+    short right;
+    short top;
+    short bottom;
+} ConsoleSize;
+
+
+HANDLE HStdOut;
+CONSOLE_SCREEN_BUFFER_INFO CsbInfo;
 
 void drawZero(COORD startPosition);
 void drawOne(COORD startPosition);

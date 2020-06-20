@@ -33,6 +33,7 @@ void clearTime();
 void drawNumber(short number, COORD angle);
 HoursMinutes getTime();
 Angles getAngles();
+ConsoleSize getSizeOfConsole();
 Time computeTimeNumbers();
 short computeFirstHourNumber(short hour);
 short computeSecondHourNumber(short hour, short firstNumber);
@@ -161,6 +162,17 @@ Angles getAngles()
     angles.minutesSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
 
     return angles;
+}
+
+ConsoleSize getSizeOfConsole()
+{
+    ConsoleSize consoleSize;
+    consoleSize.left = CsbInfo.srWindow.Left;
+    consoleSize.right = CsbInfo.srWindow.Right;
+    consoleSize.top = CsbInfo.srWindow.Top;
+    consoleSize.bottom = CsbInfo.srWindow.Bottom;
+
+    return consoleSize;
 }
 
 Time computeTimeNumbers()
