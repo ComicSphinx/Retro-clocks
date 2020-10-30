@@ -27,18 +27,16 @@ typedef struct
 
 
 void cycleDrawTime();
-void showTime();
 bool checkTimeIsChanged();
 void clearTime();
-void drawNumber(short number, COORD angle);
+void showTime();
 HoursMinutes getTime();
-Angles getAngles();
 ConsoleSize getSizeOfConsole();
 Time computeTimeNumbers();
-short computeFirstHourNumber(short hour);
-short computeSecondHourNumber(short hour, short firstNumber);
-short computeFirstMinuteNumber(short minute);
-short computeSecondMinuteNumber(short minute, short firstNumber);
+Angles getAngles();
+void drawNumber(short number, COORD angle);
+short computeFirstNumber(short minute);
+short computeSecondNumber(short minute, short firstNumber);
 
 
 void cycleDrawTime()
@@ -75,17 +73,6 @@ bool checkTimeIsChanged()
     }
 }
 
-void showTime()
-{
-    Time time = computeTimeNumbers();
-    Angles angles = getAngles();
-
-    drawNumber(time.hourFirstNumber, angles.hourFirstNumberAngle);
-    drawNumber(time.hourSecondNumber, angles.hourSecondNumberAngle);
-    drawNumber(time.minuteFirstNumber, angles.minutesFirstNumberAngle);
-    drawNumber(time.minuteSecondNumber, angles.minutesSecondNumberAngle);
-}
-
 void clearTime()
 {
     long unsigned int cWrittenChars;
@@ -102,6 +89,73 @@ void clearTime()
         FillConsoleOutputCharacter(HStdOut, (TCHAR)EMPTY_CHAR, height, startPosition, &cWrittenChars);
         ++startPosition.Y;
     }
+}
+
+void showTime()
+{
+    Time time = computeTimeNumbers();
+    Angles angles = getAngles();
+
+    drawNumber(time.hourFirstNumber, angles.hourFirstNumberAngle);
+    drawNumber(time.hourSecondNumber, angles.hourSecondNumberAngle);
+    drawNumber(time.minuteFirstNumber, angles.minutesFirstNumberAngle);
+    drawNumber(time.minuteSecondNumber, angles.minutesSecondNumberAngle);
+}
+
+HoursMinutes getTime()
+{
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+
+    HoursMinutes hoursMinutes;
+    hoursMinutes.hour = st.wHour;
+    hoursMinutes.minute = st.wMinute;
+    return hoursMinutes;
+}
+
+ConsoleSize getSizeOfConsole()
+{
+    ConsoleSize consoleSize;
+    consoleSize.left = CsbInfo.srWindow.Left;
+    consoleSize.right = CsbInfo.srWindow.Right;
+    consoleSize.top = CsbInfo.srWindow.Top;
+    consoleSize.bottom = CsbInfo.srWindow.Bottom;
+
+    return consoleSize;
+}
+
+Time computeTimeNumbers()
+{
+    HoursMinutes hoursMinutes = getTime();
+    Time time;
+    time.hourFirstNumber = computeFirstNumber(hoursMinutes.hour);
+    time.hourSecondNumber = computeSecondNumber(time.hourFirstNumber, hoursMinutes.hour);
+    time.minuteFirstNumber = computeFirstNumber(hoursMinutes.minute);
+    time.minuteSecondNumber = computeSecondNumber(time.minuteFirstNumber, hoursMinutes.minute);
+
+    return time;
+}
+
+Angles getAngles()
+{
+    Angles angles;
+    ConsoleSize consoleSize = getSizeOfConsole();
+
+    angles.hourFirstNumberAngle.X = ((consoleSize.right / 2) / 2);
+    short x = (angles.hourFirstNumberAngle.X / 2) / 2;
+    angles.hourFirstNumberAngle.X += x;
+    angles.hourFirstNumberAngle.Y = (consoleSize.bottom / 2) - 7;
+
+    angles.hourSecondNumberAngle.X = angles.hourFirstNumberAngle.X + 10;
+    angles.hourSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
+
+    angles.minutesFirstNumberAngle.X = 18 + angles.hourSecondNumberAngle.X;
+    angles.minutesFirstNumberAngle.Y = angles.hourFirstNumberAngle.Y;
+
+    angles.minutesSecondNumberAngle.X = 12 + angles.minutesFirstNumberAngle.X;
+    angles.minutesSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
+
+    return angles;
 }
 
 void drawNumber(short number, COORD angle)
@@ -128,102 +182,15 @@ void drawNumber(short number, COORD angle)
         drawNine(angle);
 }
 
-HoursMinutes getTime()
+short computeFirstNumber(short number)
 {
-    SYSTEMTIME st;
-    GetLocalTime(&st);
-
-    HoursMinutes hoursMinutes;
-
-    hoursMinutes.hour = st.wHour;
-    hoursMinutes.minute = st.wMinute;
-
-    return hoursMinutes;
+    number = number / 10;
+    return number;
 }
 
-Angles getAngles()
-{
-    Angles angles;
-
-    ConsoleSize consoleSize = getSizeOfConsole();
-
-    angles.hourFirstNumberAngle.X = ((consoleSize.right / 2) / 2);
-    short x = (angles.hourFirstNumberAngle.X / 2) / 2;
-    angles.hourFirstNumberAngle.X += x;
-    angles.hourFirstNumberAngle.Y = (consoleSize.bottom / 2) - 7;
-    
-    angles.hourSecondNumberAngle.X = angles.hourFirstNumberAngle.X + 10;
-    angles.hourSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
-
-    angles.minutesFirstNumberAngle.X = 18 + angles.hourSecondNumberAngle.X;
-    angles.minutesFirstNumberAngle.Y = angles.hourFirstNumberAngle.Y;
-
-    angles.minutesSecondNumberAngle.X = 12 + angles.minutesFirstNumberAngle.X;
-    angles.minutesSecondNumberAngle.Y = angles.hourFirstNumberAngle.Y;
-
-    return angles;
-}
-
-ConsoleSize getSizeOfConsole()
-{
-    ConsoleSize consoleSize;
-    consoleSize.left = CsbInfo.srWindow.Left;
-    consoleSize.right = CsbInfo.srWindow.Right;
-    consoleSize.top = CsbInfo.srWindow.Top;
-    consoleSize.bottom = CsbInfo.srWindow.Bottom;
-
-    return consoleSize;
-}
-
-Time computeTimeNumbers()
-{
-    HoursMinutes hoursMinutes = getTime();
-    Time time;
-
-    time.hourFirstNumber = computeFirstHourNumber(hoursMinutes.hour);
-    time.hourSecondNumber = computeSecondHourNumber(hoursMinutes.hour, time.hourFirstNumber);
-    time.minuteFirstNumber = computeFirstMinuteNumber(hoursMinutes.minute);
-    time.minuteSecondNumber = computeSecondHourNumber(hoursMinutes.minute, time.minuteFirstNumber);
-
-    return time;
-}
-
-short computeFirstHourNumber(short hour)
-{
-    if (hour >= 20)
-        return 2;
-    else if (hour >= 10)
-        return 1;
-    else if (hour >= 0)
-        return 0;
-}
-
-short computeSecondHourNumber(short hour, short firstNumber)
+short computeSecondNumber(short firstNumber, short secondNumber)
 {
     firstNumber *= 10;
-    hour -= firstNumber;
-    return hour;
-}
-
-short computeFirstMinuteNumber(short minute)
-{
-    if (minute >= 50)
-        return 5;
-    else if (minute >= 40)
-        return 4;
-    else if (minute >= 30)
-        return 3;
-    else if (minute >= 20)
-        return 2;
-    else if (minute >= 10)
-        return 1;   
-    else if (minute >= 0)
-        return 0;
-}
-
-short computeSecondMinuteNumber(short minute, short firstNumber)
-{
-    firstNumber *= 10;
-    minute -= firstNumber;
-    return minute;
+    secondNumber -= firstNumber;
+    return secondNumber;
 }
