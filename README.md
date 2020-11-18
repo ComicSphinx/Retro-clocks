@@ -24,4 +24,4 @@ Change the <b>CHAR_NUMBERS</b> constant in <b>shapes.c</b> to the value you need
 
 ## Author
   - **Daniil Maslov** -
-    [Desasth](https://github.com/Desasth)
+    [ComicSphinx](https://github.com/ComicSphinx)
