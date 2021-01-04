@@ -67,8 +67,6 @@ bool checkTimeIsChanged()
     }
     else
     {
-        oldTime.hour = currentTime.hour;
-        oldTime.minute = currentTime.minute;
         return false;
     }
 }
