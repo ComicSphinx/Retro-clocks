@@ -17,6 +17,7 @@ Change the <b>CHAR_NUMBERS</b> constant in <b>shapes.c</b> to the value you need
 ### Important
  * Do not try to launch it in the git bash. It will not work.
  * This app can heavily load the processor
+ * Even if you use 12 hour time format (am/pm), this app will show time in the 24 hour time. 
 
 ## TODO
  * Need do better perfomance (while cycle consumes too much).
